@@ -2,8 +2,8 @@ describe('License plate store home page', () => {
 
     beforeEach(() => {
         cy.server();
-        cy.route('/demos/angular/rates.php', {EUR: 1.5, GBP: 2}).as('rates');
-        cy.route('/demos/angular/plates.php', 'fixture:plates.json').as('plates');
+        cy.route('/rates', {EUR: 1.5, GBP: 2}).as('rates');
+        cy.route('/data', 'fixture:plates.json').as('plates');
         cy.visit('/');
         cy.wait('@rates');
         cy.wait('@plates');

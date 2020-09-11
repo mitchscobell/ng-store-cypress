@@ -2,9 +2,9 @@ describe('Checkout features', () => {
 
     beforeEach(() => {
         cy.server();
-        cy.route('/demos/angular/rates.php', {EUR: 1.5, GBP: 2}).as('rates');
-        cy.route('/demos/angular/plates.php', 'fixture:plates.json').as('plates');
-        cy.route('POST', '/demos/angular/checkout.php', {result: 'OK'}).as('checkout');
+        cy.route('/rates', {EUR: 1.5, GBP: 2}).as('rates');
+        cy.route('/plates', 'fixture:plates.json').as('plates');
+        cy.route('POST', '/checkout', {result: 'OK'}).as('checkout');
         cy.visit('/');
         cy.wait('@rates');
         cy.wait('@plates');

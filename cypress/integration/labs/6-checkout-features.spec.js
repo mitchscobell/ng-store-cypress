@@ -2,9 +2,9 @@ describe('Checkout features', () => {
 
     beforeEach(() => {
         cy.server();
-        cy.route('/demos/angular/rates.php', {EUR: 1.5, GBP: 2}).as('rates');
-        cy.route('/demos/angular/plates.php', 'fixture:plates.json').as('plates');
-        cy.route('POST', '/demos/angular/checkout.php', {result: 'OK'}).as('checkout');
+        cy.route('/rates', {EUR: 1.5, GBP: 2}).as('rates');
+        cy.route('/data', 'fixture:plates.json').as('plates');
+        cy.route('POST', '/checkout', {result: 'OK'}).as('checkout');
         cy.visit('/');
         cy.wait('@rates');
         cy.wait('@plates');
@@ -28,7 +28,7 @@ describe('Checkout features', () => {
 
     it('makes a request to the server upon form submission', () => {
         // TODO: Navigate to the checkout page and fill out the form with data
-        // TODO: Click the submit button and make sure that a HTTP POST request to /checkout.php was made and that the response was successful
+        // TODO: Click the submit button and make sure that a HTTP POST request to /checkout was made and that the response was successful
     });
 
 });
