@@ -23,6 +23,6 @@
   "homepage": "https://github.com/alcfeoh/ng-store-cypress#readme",
   "dependencies": {},
   "devDependencies": {
-    "cypress": "^5.0.0"
+    "cypress": "^8.6.0"
   }
 }
