@@ -6,8 +6,6 @@ describe('Checkout features', () => {
         cy.route('/data', 'fixture:plates.json').as('plates');
         cy.route('POST', '/checkout', {result: 'OK'}).as('checkout');
         cy.visit('/');
-        cy.wait('@rates');
-        cy.wait('@plates');
     });
 
     it('hides the submit button as long as the checkout form is invalid', () => {

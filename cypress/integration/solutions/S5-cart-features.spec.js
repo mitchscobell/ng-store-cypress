@@ -13,7 +13,7 @@ describe('Cart features', () => {
         cy.get(`app-license-plate:nth-of-type(3)`)
             .contains('Add to cart').click();
         cy.contains('My cart').click();
-        cy.contains('Your cart is empty').should('not.be.visible');
+        cy.contains('Your cart is empty').should('not.exist');
         cy.checkLicensePlateAt(1, '2013 California My Tahoe license plate', '$9');
         cy.get(`app-license-plate:nth-of-type(1)`).contains('Remove from cart');
     });
@@ -23,7 +23,7 @@ describe('Cart features', () => {
             .contains('Add to cart').click();
         cy.contains('My cart').click();
         cy.get(`app-license-plate:nth-of-type(1)`).contains('Remove from cart').click();
-        cy.get(`app-license-plate`).should('not.be.visible');
+        cy.get(`app-license-plate`).should('not.exist');
         cy.contains('Your cart is empty').should('be.visible');
     });
 
