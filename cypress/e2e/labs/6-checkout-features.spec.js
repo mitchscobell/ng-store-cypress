@@ -1,10 +1,9 @@
 describe('Checkout features', () => {
 
     beforeEach(() => {
-        cy.server();
-        cy.route('/rates', {EUR: 1.5, GBP: 2}).as('rates');
-        cy.route('/data', 'fixture:plates.json').as('plates');
-        cy.route('POST', '/checkout', {result: 'OK'}).as('checkout');
+        cy.intercept('/rates', {EUR: 1.5, GBP: 2}).as('rates');
+        cy.intercept('/data', {fixture: 'plates.json'}).as('plates');
+        cy.intercept('POST', '/checkout', {result: 'OK'}).as('checkout');
         cy.visit('/');
     });
 

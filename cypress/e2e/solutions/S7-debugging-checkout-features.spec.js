@@ -1,10 +1,9 @@
 describe('Checkout features', () => {
 
     beforeEach(() => {
-        cy.server();
-        cy.route('/rates', {EUR: 1.5, GBP: 2}).as('rates');
-        cy.route('/data', 'fixture:plates.json').as('plates');
-        cy.route('POST', '/checkout', {result: 'OK'}).as('checkout');
+        cy.intercept('/rates', {EUR: 1.5, GBP: 2}).as('rates');
+        cy.intercept('/data', {fixture: 'plates.json'}).as('plates');
+        cy.intercept('POST', '/checkout', {result: 'OK'}).as('checkout');
         cy.visit('/');
     });
 
@@ -35,7 +34,7 @@ describe('Checkout features', () => {
         cy.get("[name='zip']").type('95742');
         cy.get("[name='cc']").type('45678901234567890');
         cy.contains('Submit').should('be.visible').click();
-        cy.wait('@checkout').then(result => cy.wrap(result.responseBody).should('be.deep.equal',  {result: 'OK'}));
+        cy.wait('@checkout').its('response.body').should('deep.equal', {result: 'OK'});
     });
 
     it('should send the proper state information', () => {
@@ -47,6 +46,6 @@ describe('Checkout features', () => {
         cy.get("[name='state']").select("California");
         cy.contains('California').should('be.visible');
         cy.contains('Submit').should('be.visible').click();
-        cy.wait('@checkout').then(result => cy.wrap(result.responseBody).should('be.deep.equal',  {result: 'OK'}));
+        cy.wait('@checkout').its('response.body').should('deep.equal', {result: 'OK'});
     });
 });

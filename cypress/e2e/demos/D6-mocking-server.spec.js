@@ -1,12 +1,9 @@
 describe('License plate store home page', () => {
 
     beforeEach(() => {
-        cy.server();
-        cy.route('/rates', {EUR: 1.5, GBP: 2}).as('rates');
-        cy.route('/data', 'fixture:plates.json').as('plates');
+        cy.intercept('/rates', {EUR: 1.5, GBP: 2}).as('rates');
+        cy.intercept('/data', {fixture: 'plates.json'}).as('plates');
         cy.visit('/');
-        cy.wait('@rates');
-        cy.wait('@plates');
     });
 
     it('displays the right main title', () => {
