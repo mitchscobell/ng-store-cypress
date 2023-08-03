@@ -21,8 +21,7 @@
     "url": "https://github.com/alcfeoh/ng-store-cypress/issues"
   },
   "homepage": "https://github.com/alcfeoh/ng-store-cypress#readme",
-  "dependencies": {},
   "devDependencies": {
-    "cypress": "^10.4.0"
+    "cypress": "^12.17.3"
   }
 }
