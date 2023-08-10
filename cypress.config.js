@@ -12,5 +12,16 @@ module.exports = defineConfig({
     // can override the default timeout for commands
     // defaultCommandTimeout: 10000,
     specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx}',
+    // environment for cypress stuffs
+    env: {
+      standardUser: {
+        email: "test@example.com",
+        password: "pass!123"
+      },
+      adminUser: {
+        email: "admin@example.com",
+        password: "pass!123"
+      },
+    }
   },
 })
