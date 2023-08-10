@@ -1,5 +1,7 @@
 const axios = require('axios').default;
 
+let plates = [];
+
 describe('License plate store home page', () => {
 
     /*
@@ -8,6 +10,10 @@ describe('License plate store home page', () => {
     */
     beforeEach(() => {
         cy.visit('/');
+        axios.get('https://lp-store-server.vercel.app/data')
+            .then(function (response) {
+                plates = response.data;
+            });
     });
 
     it('displays the right main title', () => {
@@ -41,23 +47,9 @@ describe('License plate store home page', () => {
 
     it('displays 8 license plates prices in array', () => {
 
-        axios.get('https://lp-store-server.vercel.app/data')
-            .then(function (response) {
-                const plates = response.data;
-                // [
-                //     { title: '2008 Georgia license plate', price: '$8' },
-                //     { title: '2015 New Jersey license plate', price: '$11' },
-                //     { title: '2013 California My Tahoe license plate', price: '$9' },
-                //     { title: '2010 Colorado license plate', price: '$5' },
-                //     { title: '2017 Florida license plate', price: '$10' },
-                //     { title: '2014 Utah license plate', price: '$10' },
-                //     { title: '2016 New York license plate', price: '$9' },
-                //     { title: '2007 Pennsylvania license plate', price: '$11' },
-                // ]
-                plates.forEach((plate, index) => {
-                    cy.get(`app-license-plate:nth-of-type(${index + 1})`).contains('h2', plate.title).scrollIntoView().should('be.visible');
-                    cy.get(`app-license-plate:nth-of-type(${index + 1})`).contains('h2', `$${plate.price}`).scrollIntoView().should('be.visible');
-                })
-            });
+        plates.forEach((plate, index) => {
+            cy.get(`app-license-plate:nth-of-type(${index + 1})`).contains('h2', plate.title).scrollIntoView().should('be.visible');
+            cy.get(`app-license-plate:nth-of-type(${index + 1})`).contains('h2', `$${plate.price}`).scrollIntoView().should('be.visible');
+        })
     });
 });
