@@ -30,4 +30,37 @@ describe('License plate store home page', () => {
         cy.contains('Checkout').click();
         cy.contains('Enter your personal information to complete your order').should('be.visible');
     });
+
+    /*
+        The currency can be switched to EUR 
+        or GBP by using the dropdown in the 
+        nav bar
+        Changing the currency updates all prices and currency symbols
+    */
+
+    it('can change the currency from USD to EUR', () => {
+        // start with USA and check that it's being used
+        cy.get('.btn-group > .dropdown-toggle').contains('USD').click();
+        cy.get('.dropdown-menu > :nth-child(1)').contains('USD').click();
+        cy.get(':nth-child(1) > div > .float-left').contains('$8').should('be.visible');
+        cy.get('.btn-group > .dropdown-toggle').contains('USD').should('be.visible');
+
+        // Switch to EUR
+        cy.get('.btn-group > .dropdown-toggle').contains('USD').click();
+        cy.get('.dropdown-menu > :nth-child(2)').contains('EUR').click();
+        cy.get('.btn-group > .dropdown-toggle').contains('EUR').should('be.visible');
+        cy.get(':nth-child(1) > div > .float-left').contains('€9.12').should('be.visible');
+
+        //Switch to GBP
+        cy.get('.btn-group > .dropdown-toggle').contains('EUR').click();
+        cy.get('.dropdown-menu > :nth-child(3)').contains('GBP').click();
+        cy.get('.btn-group > .dropdown-toggle').contains('GBP').should('be.visible');
+        cy.get(':nth-child(1) > div > .float-left').contains('£10.48').should('be.visible');
+
+        // back to USA USA USA!!!
+        cy.get('.btn-group > .dropdown-toggle').contains('GBP').click();
+        cy.get('.dropdown-menu > :nth-child(1)').contains('USD').click();
+        cy.get(':nth-child(1) > div > .float-left').contains('$8').should('be.visible');
+        cy.get('.btn-group > .dropdown-toggle').contains('USD').should('be.visible');
+    });
 });
