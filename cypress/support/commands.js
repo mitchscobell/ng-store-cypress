@@ -29,3 +29,22 @@ Cypress.Commands.add("checkLicensePlateAt", (index, ...stringsToCheck) => {
         cy.get(`app-license-plate:nth-of-type(${index})`).contains(str).should('be.visible');
     }
 });
+
+// Example of a login command
+Cypress.Commands.add('login', (email, password) => {
+    cy.visit('/login');
+    cy.get('.login').type(email);
+    cy.get('.password').type(password);
+    cy.get('button[type="submit"]').click();
+ });
+ 
+ /// A custom command that validates the page title, font size, font weight, in one place
+ Cypress.Commands.add('validateTitleAndFonts', (pageNav, titleText, fontWeight = '300', fontSize = '72px', fontName = /Segoe UI/) => {
+    cy.contains(pageNav).click();
+    cy.get('.display-3')
+    .contains(titleText)
+    .should('be.visible')
+    .should('have.css', 'font-weight', fontWeight)
+    .should('have.css', 'font-size', fontSize)
+    .and('have.css', 'font-family').and('match', fontName);
+ })

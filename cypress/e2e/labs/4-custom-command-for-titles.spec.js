@@ -4,12 +4,20 @@ describe('License plate store home page', () => {
         cy.visit('/');
     });
 
+    /*
+        Then write a custom command that validates the page title, font size, font weight, in one place
+        Then use that command in all three tests that check the current page title (home page / cart page / checkout page)
+    */
+
     it('displays the right main title', () => {
-        cy.contains('Welcome to our store')
-            .should('be.visible')
-            .should('have.css', 'font-weight', '300')
-            .should('have.css', 'font-size', '72px')
-            .and('have.css', 'font-family').and('match', /Segoe UI/);
+        // home page
+        cy.validateTitleAndFonts('Home','Welcome to our store', '300', '72px', /Segoe UI/);
+
+        // My cart page
+        cy.validateTitleAndFonts('My cart', 'My Cart', '300', '72px', /Segoe UI/);
+
+        // Checkout page
+        cy.validateTitleAndFonts('Checkout', 'Checkout', '300', '72px', /Segoe UI/);
     });
 
     it('can navigate to the cart page', () => {
