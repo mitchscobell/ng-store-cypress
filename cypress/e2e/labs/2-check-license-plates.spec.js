@@ -20,7 +20,7 @@ describe('License plate store home page', () => {
 
         const amountOfLicensePlates = 8;
         cy.get('app-license-plate').should('have.length', amountOfLicensePlates);
-        cy.get(`app-license-plate`).each(($el, index, $list) => {
+        cy.get(`app-license-plate`).each(($el) => {
             cy.wrap($el).get('h2').should('contain.text', 'license plate').and('be.visible');
             cy.wrap($el).get('h2').should('contain.text', '20').and('be.visible');
             cy.wrap($el).get('h2').should('contain.text', '$').and('be.visible');
