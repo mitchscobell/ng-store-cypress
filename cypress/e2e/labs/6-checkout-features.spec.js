@@ -11,6 +11,7 @@ describe('Checkout features', () => {
         // TODO: Navigate to the checkout page and check that the submit button is not showing up
         cy.contains("Checkout").click();
         cy.get(`Submit`).should('not.exist');
+        // cy.get(`[type='submit']`).contains('Submit').should('not.visible');
         //  TODO: Enter a first name, last name, and check that the submit button is still not showing up
         cy.get("[name='firstname']").type('Mitchy');
         cy.get("[name='lastname']").type('Scobelli');
@@ -20,7 +21,6 @@ describe('Checkout features', () => {
         cy.get("[name='zip']").type(53718);
         cy.get("[name='cc']").type(1234567812345678);
         cy.get(`[type='submit']`).should('be.visible');
-
     });
 
     it('displays an error message when an invalid zipcode is entered', () => {
@@ -34,11 +34,16 @@ describe('Checkout features', () => {
         cy.contains('Please enter a 5-digit zipcode');
         // TODO: Enter 12345 as a zipcode  then remove focus from that input (blur)
         cy.get("[name='zip']").click();
-        cy.get("[name='zip']").type('{selectAll}12345').blur();
+        cy.get("[name='zip']").type('{selectAll}hello world!!!!').blur();
+        for (let i = 0; i < 10; i++) {
+            cy.get("[name='zip']").type('{backspace}');
+        }
+        cy.get("[name='zip']").type('12345').blur();
+        cy.get("[name='zip']").clear().type('12345').blur();
         // TODO: Check that the message 'Please enter a 5-digit zipcode' is NOT displayed anymore
         cy.get('Please enter a 5-digit zipcode').should('not.exist');
         // TODO:  Check that the ng-valid css class is applied to the zipcode form input
-        cy.get("[name='zip']").should('have.class', 'ng-valid');
+        cy.get("[name='zip']").should('have.class', 'ng-valid').should('not.have.class', 'ng-invalid');
     });
 
     it('makes a request to the server upon form submission', () => {
