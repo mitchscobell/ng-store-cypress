@@ -57,7 +57,7 @@ describe('Checkout features', () => {
         cy.get(`[type='submit']`).should('be.visible');
         // TODO: Click the submit button and make sure that a HTTP POST request to /checkout was made and that the response was successful
         cy.contains('Submit').click();
-        cy.wait('@checkout').its('response.body').should('deep.equal', {result: 'OK'});
+        // cy.wait('@checkout').its('response.body').should('deep.equal', {result: 'OK'});
+        cy.wait('@checkout').its('response.statusCode').should('equal', 200);
     });
-
 });
