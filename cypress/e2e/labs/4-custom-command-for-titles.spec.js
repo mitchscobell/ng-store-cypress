@@ -23,6 +23,10 @@ describe('License plate store home page', () => {
 
         // Checkout page
         cy.validateTitleAndFonts('Checkout', 'Checkout', fontWeight, fontSize, fontName);
+
+        //example of using the env
+        const standardUser = Cypress.env('standardUser');
+        console.log('')
     });
 
     it('can navigate to the cart page', () => {
