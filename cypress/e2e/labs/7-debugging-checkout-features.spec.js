@@ -43,7 +43,7 @@ describe('Checkout features', () => {
         cy.get("[name='lastname']").type('Chautard');
         cy.get("[name='zip']").type('95742');
         cy.get("[name='cc']").type('45678901234567890');
-        cy.get("[name='State']").select("Calif.");
+        cy.get("[name='state']").select("CA");
         cy.contains('California').should('be.visible');
         cy.contains('Submit').should('be.visible').click();
         cy.wait('@checkout').its('response.body').should('deep.equal', {result: 'OK'});
