@@ -9,6 +9,8 @@ module.exports = defineConfig({
       return require('./cypress/plugins/index.js')(on, config)
     },
     baseUrl: 'http://store.angulartraining.com',
+    // can override the default timeout for commands
+    // defaultCommandTimeout: 10000,
     specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx}',
   },
 })

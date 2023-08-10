@@ -3,7 +3,8 @@ describe('License plate store home page', () => {
     // beforeEach is for something that needs to be done for all tests.
     //          This is helpful for logging on
     beforeEach(() => {
-        cy.visit('http://store.angulartraining.com');
+        // uses basesUrl config
+        cy.visit('/');
     });
 
     it('displays the right main title', () => {
