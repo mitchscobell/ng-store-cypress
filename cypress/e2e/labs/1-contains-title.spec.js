@@ -13,7 +13,19 @@ describe('License plate store home page', () => {
             .should('have.css', 'font-weight', '300')
             .should('have.css', 'font-size', '72px')
             .should('have.css', 'font-family')
-            .and('match', /Segoe UI/)
-
+            .and('match', /Segoe UI/) //regular expression
+        // OR
+        cy.contains('Welcome to our store')
+            .should('be.visible')
+            .should('have.css', 'font-weight', '300')
+            .should('have.css', 'font-size', '72px')
+            .and('have.css', 'font-family').and('match', /Segoe UI/)//regular expression
+        // OR
+        cy.contains('Welcome to our store')
+            .should('be.visible')
+            .should('have.css', 'font-weight', '300')
+            .should('have.css', 'font-size', '72px')
+            .should('have.css', 'font-family')
+            .and('contains', "Segoe UI")
     });
 });
