@@ -9,7 +9,11 @@ describe('Checkout features', () => {
 
     it('hides the submit button as long as the checkout form is invalid', () => {
         // TODO: Navigate to the checkout page and check that the submit button is not showing up
+        cy.contains("Checkout").click();
+        cy.get(`Submit`).should('not.exist');
         //  TODO: Enter a first name, last name, and check that the submit button is still not showing up
+        
+        cy.get(`Submit`).should('not.exist');
         // TODO: Enter a 5-digit zipcode and a 16-digit number that starts with 4 as a credit card number
         //  TODO Then check that the submit button is showing up
     });
