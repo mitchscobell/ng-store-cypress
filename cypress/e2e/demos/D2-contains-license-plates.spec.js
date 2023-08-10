@@ -15,6 +15,11 @@ describe('License plate store home page', () => {
     });
 
     it('displays 8 license plates', () => {
-        cy.get('app-license-plate').should('have.length', 8);
+        //cy.get('app-license-plate').should('have.length', 8);
+        // can pass in a timeout as part of a config
+        const config = {
+            timeout: 10000
+        }
+        cy.get('app-license-plate', config).should('have.length', 8);
     });
 });
